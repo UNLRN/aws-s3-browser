@@ -28,17 +28,18 @@ namespace aws_uploader
         private static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, uint wParam, [MarshalAs(UnmanagedType.LPWStr)] string lParam);
 
         //Upload Variables//
-        public string[] folders;
-        public string[] files;
+        //private static List<string> folders = new List<string>();
+        //private static List<string> files = new List<string>();
+        private static string[] files;
 
         //S3 Variables//
-        public AmazonS3Client s3Client;
-        public string bucketname = "srpdesign";
-        public string rootFolder = "";
+        private AmazonS3Client s3Client;
+        private string bucketname = "srpdesign";
+        private string rootFolder = "";
 
         //S3 Methods//
         //Create S3 Bucket//
-        static void CreateBucket(IAmazonS3 client, string bucket)
+        private static void CreateBucket(IAmazonS3 client, string bucket)
         {
             bucket = bucket.Replace("\\", "/");
             try
@@ -58,6 +59,27 @@ namespace aws_uploader
         }
         //Upload S3 Files//
 
+        //Get Directories Recursively//
+        //ShowAllFoldersUnder(path, 0);//
+        private static List<string> ShowAllFoldersUnder(string path, int indent)
+        {
+            List<string> folders = new List<string>();
+            try
+            {
+                if ((File.GetAttributes(path) & FileAttributes.ReparsePoint) != FileAttributes.ReparsePoint)
+                {
+                    foreach (string folder in Directory.GetDirectories(path))
+                    {
+                        folders.Add(Path.GetFileName(folder));
+                        //Console.WriteLine("{0}{1}", new string(' ', indent), Path.GetFileName(folder));
+                        //ShowAllFoldersUnder(folder, indent + 2);
+                    }
+                }
+            }
+            catch (UnauthorizedAccessException) { };
+            return folders;
+        }
+
         public frmMain()
         {
             InitializeComponent();
@@ -66,7 +88,7 @@ namespace aws_uploader
             //SendMessage(tbx_searchKey.Handle, EM_SETCUEBANNER, 0, "Search Key...");
         }
 
-        private void FrmMain_Load(object sender, EventArgs e)
+        private void frmMain_Load(object sender, EventArgs e)
         {
             s3Client = new AmazonS3Client(RegionEndpoint.USEast1);
         }
@@ -88,10 +110,11 @@ namespace aws_uploader
                         !Directory.Exists(ofd_getFolders.FileName))
                     {
                         tbx_directory.Text = Path.GetDirectoryName(ofd_getFolders.FileName);
-                        folders = Directory.GetDirectories(tbx_directory.Text, "*", SearchOption.AllDirectories);
+                        List<String> folders = ShowAllFoldersUnder(tbx_directory.Text, 0);
                         foreach (string item in folders)
                         {
                             dgv_fileList.Rows.Add(item, "Folder");
+                            Console.WriteLine(item);
                         }
                     }
                 }
@@ -191,6 +214,30 @@ namespace aws_uploader
             {
                 Console.WriteLine(ae.Message, ae.InnerException);
             }
+        }
+
+        private void btn_refreshBucket_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ListBucketsResponse response = s3Client.ListBuckets();
+                foreach (S3Bucket b in response.Buckets)
+                {
+                    tvw_buckets.Nodes.Add(b.BucketName);
+                }
+            }
+            catch (AmazonS3Exception ae)
+            {
+                Console.WriteLine(ae);
+                throw;
+            }
+            
+
+        }
+
+        private void btn_addBucket_Click(object sender, EventArgs e)
+        {
+            
         }
     }
 }

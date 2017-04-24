@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
-            this.gbx_files = new System.Windows.Forms.GroupBox();
             this.tbx_directory = new System.Windows.Forms.TextBox();
             this.btn_upload = new System.Windows.Forms.Button();
             this.btn_deleteItem = new System.Windows.Forms.Button();
@@ -39,47 +38,33 @@
             this.dgvName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dgvType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbx_buckets = new System.Windows.Forms.GroupBox();
-            this.lbx_buckets = new System.Windows.Forms.ListBox();
+            this.tvw_buckets = new System.Windows.Forms.TreeView();
+            this.btn_refreshBucket = new System.Windows.Forms.Button();
             this.btn_settings = new System.Windows.Forms.Button();
             this.btn_removeBucket = new System.Windows.Forms.Button();
             this.btn_addBucket = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.tabctrl = new System.Windows.Forms.TabControl();
+            this.tab_upload = new System.Windows.Forms.TabPage();
+            this.tab_fileManager = new System.Windows.Forms.TabPage();
             this.ofd_getFolders = new System.Windows.Forms.OpenFileDialog();
             this.ofd_getFiles = new System.Windows.Forms.OpenFileDialog();
-            this.gbx_files.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fileList)).BeginInit();
             this.gbx_buckets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
+            this.tabctrl.SuspendLayout();
+            this.tab_upload.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // gbx_files
-            // 
-            this.gbx_files.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.gbx_files.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.gbx_files.Controls.Add(this.tbx_directory);
-            this.gbx_files.Controls.Add(this.btn_upload);
-            this.gbx_files.Controls.Add(this.btn_deleteItem);
-            this.gbx_files.Controls.Add(this.btn_addItem);
-            this.gbx_files.Controls.Add(this.btn_browse);
-            this.gbx_files.Controls.Add(this.dgv_fileList);
-            this.gbx_files.Location = new System.Drawing.Point(3, 3);
-            this.gbx_files.Name = "gbx_files";
-            this.gbx_files.Size = new System.Drawing.Size(764, 632);
-            this.gbx_files.TabIndex = 1;
-            this.gbx_files.TabStop = false;
-            this.gbx_files.Text = "Files";
             // 
             // tbx_directory
             // 
             this.tbx_directory.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbx_directory.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_directory.Location = new System.Drawing.Point(8, 21);
+            this.tbx_directory.Location = new System.Drawing.Point(6, 6);
             this.tbx_directory.Name = "tbx_directory";
             this.tbx_directory.Size = new System.Drawing.Size(652, 22);
             this.tbx_directory.TabIndex = 5;
@@ -88,7 +73,7 @@
             // btn_upload
             // 
             this.btn_upload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_upload.Location = new System.Drawing.Point(668, 506);
+            this.btn_upload.Location = new System.Drawing.Point(665, 484);
             this.btn_upload.Name = "btn_upload";
             this.btn_upload.Size = new System.Drawing.Size(87, 107);
             this.btn_upload.TabIndex = 4;
@@ -99,7 +84,7 @@
             // btn_deleteItem
             // 
             this.btn_deleteItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_deleteItem.Location = new System.Drawing.Point(668, 114);
+            this.btn_deleteItem.Location = new System.Drawing.Point(662, 97);
             this.btn_deleteItem.Name = "btn_deleteItem";
             this.btn_deleteItem.Size = new System.Drawing.Size(87, 54);
             this.btn_deleteItem.TabIndex = 3;
@@ -110,7 +95,7 @@
             // btn_addItem
             // 
             this.btn_addItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_addItem.Location = new System.Drawing.Point(669, 54);
+            this.btn_addItem.Location = new System.Drawing.Point(662, 37);
             this.btn_addItem.Name = "btn_addItem";
             this.btn_addItem.Size = new System.Drawing.Size(87, 54);
             this.btn_addItem.TabIndex = 2;
@@ -121,7 +106,7 @@
             // btn_browse
             // 
             this.btn_browse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_browse.Location = new System.Drawing.Point(670, 21);
+            this.btn_browse.Location = new System.Drawing.Point(662, 6);
             this.btn_browse.Name = "btn_browse";
             this.btn_browse.Size = new System.Drawing.Size(87, 25);
             this.btn_browse.TabIndex = 1;
@@ -139,10 +124,11 @@
             this.dgv_fileList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvName,
             this.dgvType});
-            this.dgv_fileList.Location = new System.Drawing.Point(8, 54);
+            this.dgv_fileList.Location = new System.Drawing.Point(6, 37);
             this.dgv_fileList.Name = "dgv_fileList";
             this.dgv_fileList.RowHeadersVisible = false;
-            this.dgv_fileList.Size = new System.Drawing.Size(653, 560);
+            this.dgv_fileList.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgv_fileList.Size = new System.Drawing.Size(653, 554);
             this.dgv_fileList.TabIndex = 0;
             // 
             // dgvName
@@ -163,7 +149,8 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.gbx_buckets.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.gbx_buckets.Controls.Add(this.lbx_buckets);
+            this.gbx_buckets.Controls.Add(this.tvw_buckets);
+            this.gbx_buckets.Controls.Add(this.btn_refreshBucket);
             this.gbx_buckets.Controls.Add(this.btn_settings);
             this.gbx_buckets.Controls.Add(this.btn_removeBucket);
             this.gbx_buckets.Controls.Add(this.btn_addBucket);
@@ -174,17 +161,25 @@
             this.gbx_buckets.TabStop = false;
             this.gbx_buckets.Text = "Buckets";
             // 
-            // lbx_buckets
+            // tvw_buckets
             // 
-            this.lbx_buckets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.tvw_buckets.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.lbx_buckets.FormattingEnabled = true;
-            this.lbx_buckets.ItemHeight = 14;
-            this.lbx_buckets.Location = new System.Drawing.Point(8, 54);
-            this.lbx_buckets.Name = "lbx_buckets";
-            this.lbx_buckets.Size = new System.Drawing.Size(364, 564);
-            this.lbx_buckets.TabIndex = 3;
+            this.tvw_buckets.Location = new System.Drawing.Point(8, 55);
+            this.tvw_buckets.Name = "tvw_buckets";
+            this.tvw_buckets.Size = new System.Drawing.Size(365, 559);
+            this.tvw_buckets.TabIndex = 5;
+            // 
+            // btn_refreshBucket
+            // 
+            this.btn_refreshBucket.Image = ((System.Drawing.Image)(resources.GetObject("btn_refreshBucket.Image")));
+            this.btn_refreshBucket.Location = new System.Drawing.Point(79, 21);
+            this.btn_refreshBucket.Name = "btn_refreshBucket";
+            this.btn_refreshBucket.Size = new System.Drawing.Size(29, 27);
+            this.btn_refreshBucket.TabIndex = 4;
+            this.btn_refreshBucket.UseVisualStyleBackColor = true;
+            this.btn_refreshBucket.Click += new System.EventHandler(this.btn_refreshBucket_Click);
             // 
             // btn_settings
             // 
@@ -214,6 +209,7 @@
             this.btn_addBucket.Size = new System.Drawing.Size(29, 27);
             this.btn_addBucket.TabIndex = 0;
             this.btn_addBucket.UseVisualStyleBackColor = true;
+            this.btn_addBucket.Click += new System.EventHandler(this.btn_addBucket_Click);
             // 
             // splitContainer1
             // 
@@ -229,10 +225,46 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.gbx_files);
+            this.splitContainer1.Panel2.Controls.Add(this.tabctrl);
             this.splitContainer1.Size = new System.Drawing.Size(1160, 638);
             this.splitContainer1.SplitterDistance = 386;
             this.splitContainer1.TabIndex = 2;
+            // 
+            // tabctrl
+            // 
+            this.tabctrl.Controls.Add(this.tab_upload);
+            this.tabctrl.Controls.Add(this.tab_fileManager);
+            this.tabctrl.Location = new System.Drawing.Point(4, 4);
+            this.tabctrl.Name = "tabctrl";
+            this.tabctrl.SelectedIndex = 0;
+            this.tabctrl.Size = new System.Drawing.Size(763, 631);
+            this.tabctrl.TabIndex = 2;
+            // 
+            // tab_upload
+            // 
+            this.tab_upload.Controls.Add(this.btn_upload);
+            this.tab_upload.Controls.Add(this.tbx_directory);
+            this.tab_upload.Controls.Add(this.btn_deleteItem);
+            this.tab_upload.Controls.Add(this.btn_addItem);
+            this.tab_upload.Controls.Add(this.dgv_fileList);
+            this.tab_upload.Controls.Add(this.btn_browse);
+            this.tab_upload.Location = new System.Drawing.Point(4, 22);
+            this.tab_upload.Name = "tab_upload";
+            this.tab_upload.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_upload.Size = new System.Drawing.Size(755, 605);
+            this.tab_upload.TabIndex = 0;
+            this.tab_upload.Text = "Upload";
+            this.tab_upload.UseVisualStyleBackColor = true;
+            // 
+            // tab_fileManager
+            // 
+            this.tab_fileManager.Location = new System.Drawing.Point(4, 22);
+            this.tab_fileManager.Name = "tab_fileManager";
+            this.tab_fileManager.Padding = new System.Windows.Forms.Padding(3);
+            this.tab_fileManager.Size = new System.Drawing.Size(755, 605);
+            this.tab_fileManager.TabIndex = 1;
+            this.tab_fileManager.Text = "Files";
+            this.tab_fileManager.UseVisualStyleBackColor = true;
             // 
             // ofd_getFolders
             // 
@@ -258,20 +290,20 @@
             this.Name = "frmMain";
             this.Text = "AWS S3 Browser";
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.gbx_files.ResumeLayout(false);
-            this.gbx_files.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fileList)).EndInit();
             this.gbx_buckets.ResumeLayout(false);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
+            this.tabctrl.ResumeLayout(false);
+            this.tab_upload.ResumeLayout(false);
+            this.tab_upload.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox gbx_files;
         private System.Windows.Forms.TextBox tbx_directory;
         private System.Windows.Forms.Button btn_upload;
         private System.Windows.Forms.Button btn_deleteItem;
@@ -284,12 +316,16 @@
         private System.Windows.Forms.Button btn_settings;
         private System.Windows.Forms.Button btn_removeBucket;
         private System.Windows.Forms.Button btn_addBucket;
-        private System.Windows.Forms.ListBox lbx_buckets;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvName;
         private System.Windows.Forms.DataGridViewTextBoxColumn dgvType;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.OpenFileDialog ofd_getFolders;
         private System.Windows.Forms.OpenFileDialog ofd_getFiles;
+        private System.Windows.Forms.Button btn_refreshBucket;
+        private System.Windows.Forms.TreeView tvw_buckets;
+        private System.Windows.Forms.TabControl tabctrl;
+        private System.Windows.Forms.TabPage tab_upload;
+        private System.Windows.Forms.TabPage tab_fileManager;
     }
 }
 
