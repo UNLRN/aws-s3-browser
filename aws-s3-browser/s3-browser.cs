@@ -237,7 +237,15 @@ namespace aws_uploader
 
         private void btn_addBucket_Click(object sender, EventArgs e)
         {
-            
+            try
+            {
+                string filepath = Environment.ExpandEnvironmentVariables(@"%USERPROFILE%\.aws\credentials");
+                Console.WriteLine(filepath);
+            }
+            catch (Exception er)
+            {
+                Console.WriteLine(er);
+            }
         }
     }
 }

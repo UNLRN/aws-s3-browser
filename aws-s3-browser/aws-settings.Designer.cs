@@ -29,37 +29,26 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(aws_settings));
-            this.btn_ok = new System.Windows.Forms.Button();
             this.btn_cancel = new System.Windows.Forms.Button();
             this.btn_apply = new System.Windows.Forms.Button();
             this.pnl_settingsButtons = new System.Windows.Forms.Panel();
             this.pnl_settingsInfo = new System.Windows.Forms.Panel();
-            this.lbl_accountName = new System.Windows.Forms.Label();
-            this.tbx_accountName = new System.Windows.Forms.TextBox();
-            this.lbl_accessKey = new System.Windows.Forms.Label();
-            this.tbx_accessKey = new System.Windows.Forms.TextBox();
-            this.tbx_secretKey = new System.Windows.Forms.TextBox();
             this.lbl_secretKey = new System.Windows.Forms.Label();
+            this.tbx_secretKey = new System.Windows.Forms.TextBox();
+            this.tbx_accessKey = new System.Windows.Forms.TextBox();
+            this.lbl_accessKey = new System.Windows.Forms.Label();
+            this.tbx_accountName = new System.Windows.Forms.TextBox();
+            this.lbl_accountName = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pnl_settingsButtons.SuspendLayout();
             this.pnl_settingsInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
-            // btn_ok
-            // 
-            this.btn_ok.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_ok.Location = new System.Drawing.Point(144, 3);
-            this.btn_ok.Name = "btn_ok";
-            this.btn_ok.Size = new System.Drawing.Size(75, 23);
-            this.btn_ok.TabIndex = 0;
-            this.btn_ok.Text = "OK";
-            this.btn_ok.UseVisualStyleBackColor = true;
-            // 
             // btn_cancel
             // 
             this.btn_cancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_cancel.Location = new System.Drawing.Point(225, 3);
+            this.btn_cancel.Location = new System.Drawing.Point(216, 3);
             this.btn_cancel.Name = "btn_cancel";
             this.btn_cancel.Size = new System.Drawing.Size(75, 23);
             this.btn_cancel.TabIndex = 1;
@@ -70,16 +59,16 @@
             // btn_apply
             // 
             this.btn_apply.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btn_apply.Location = new System.Drawing.Point(306, 3);
+            this.btn_apply.Location = new System.Drawing.Point(297, 3);
             this.btn_apply.Name = "btn_apply";
             this.btn_apply.Size = new System.Drawing.Size(75, 23);
             this.btn_apply.TabIndex = 2;
             this.btn_apply.Text = "Apply";
             this.btn_apply.UseVisualStyleBackColor = true;
+            this.btn_apply.Click += new System.EventHandler(this.btn_apply_Click);
             // 
             // pnl_settingsButtons
             // 
-            this.pnl_settingsButtons.Controls.Add(this.btn_ok);
             this.pnl_settingsButtons.Controls.Add(this.btn_cancel);
             this.pnl_settingsButtons.Controls.Add(this.btn_apply);
             this.pnl_settingsButtons.Dock = System.Windows.Forms.DockStyle.Bottom;
@@ -104,14 +93,41 @@
             this.pnl_settingsInfo.Size = new System.Drawing.Size(381, 149);
             this.pnl_settingsInfo.TabIndex = 4;
             // 
-            // lbl_accountName
+            // lbl_secretKey
             // 
-            this.lbl_accountName.AutoSize = true;
-            this.lbl_accountName.Location = new System.Drawing.Point(4, 4);
-            this.lbl_accountName.Name = "lbl_accountName";
-            this.lbl_accountName.Size = new System.Drawing.Size(81, 13);
-            this.lbl_accountName.TabIndex = 0;
-            this.lbl_accountName.Text = "Account Name:";
+            this.lbl_secretKey.AutoSize = true;
+            this.lbl_secretKey.Location = new System.Drawing.Point(7, 88);
+            this.lbl_secretKey.Name = "lbl_secretKey";
+            this.lbl_secretKey.Size = new System.Drawing.Size(100, 13);
+            this.lbl_secretKey.TabIndex = 5;
+            this.lbl_secretKey.Text = "Secret Access Key:";
+            // 
+            // tbx_secretKey
+            // 
+            this.tbx_secretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbx_secretKey.Location = new System.Drawing.Point(7, 104);
+            this.tbx_secretKey.Name = "tbx_secretKey";
+            this.tbx_secretKey.Size = new System.Drawing.Size(365, 20);
+            this.tbx_secretKey.TabIndex = 4;
+            // 
+            // tbx_accessKey
+            // 
+            this.tbx_accessKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tbx_accessKey.Location = new System.Drawing.Point(7, 60);
+            this.tbx_accessKey.Name = "tbx_accessKey";
+            this.tbx_accessKey.Size = new System.Drawing.Size(365, 20);
+            this.tbx_accessKey.TabIndex = 3;
+            // 
+            // lbl_accessKey
+            // 
+            this.lbl_accessKey.AutoSize = true;
+            this.lbl_accessKey.Location = new System.Drawing.Point(4, 44);
+            this.lbl_accessKey.Name = "lbl_accessKey";
+            this.lbl_accessKey.Size = new System.Drawing.Size(80, 13);
+            this.lbl_accessKey.TabIndex = 2;
+            this.lbl_accessKey.Text = "Access Key ID:";
             // 
             // tbx_accountName
             // 
@@ -123,41 +139,14 @@
             this.tbx_accountName.Size = new System.Drawing.Size(365, 20);
             this.tbx_accountName.TabIndex = 1;
             // 
-            // lbl_accessKey
+            // lbl_accountName
             // 
-            this.lbl_accessKey.AutoSize = true;
-            this.lbl_accessKey.Location = new System.Drawing.Point(4, 44);
-            this.lbl_accessKey.Name = "lbl_accessKey";
-            this.lbl_accessKey.Size = new System.Drawing.Size(80, 13);
-            this.lbl_accessKey.TabIndex = 2;
-            this.lbl_accessKey.Text = "Access Key ID:";
-            // 
-            // tbx_accessKey
-            // 
-            this.tbx_accessKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbx_accessKey.Location = new System.Drawing.Point(7, 60);
-            this.tbx_accessKey.Name = "tbx_accessKey";
-            this.tbx_accessKey.Size = new System.Drawing.Size(365, 20);
-            this.tbx_accessKey.TabIndex = 3;
-            // 
-            // tbx_secretKey
-            // 
-            this.tbx_secretKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tbx_secretKey.Location = new System.Drawing.Point(7, 104);
-            this.tbx_secretKey.Name = "tbx_secretKey";
-            this.tbx_secretKey.Size = new System.Drawing.Size(365, 20);
-            this.tbx_secretKey.TabIndex = 4;
-            // 
-            // lbl_secretKey
-            // 
-            this.lbl_secretKey.AutoSize = true;
-            this.lbl_secretKey.Location = new System.Drawing.Point(7, 88);
-            this.lbl_secretKey.Name = "lbl_secretKey";
-            this.lbl_secretKey.Size = new System.Drawing.Size(100, 13);
-            this.lbl_secretKey.TabIndex = 5;
-            this.lbl_secretKey.Text = "Secret Access Key:";
+            this.lbl_accountName.AutoSize = true;
+            this.lbl_accountName.Location = new System.Drawing.Point(4, 4);
+            this.lbl_accountName.Name = "lbl_accountName";
+            this.lbl_accountName.Size = new System.Drawing.Size(81, 13);
+            this.lbl_accountName.TabIndex = 0;
+            this.lbl_accountName.Text = "Account Name:";
             // 
             // pictureBox1
             // 
@@ -192,8 +181,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btn_ok;
         private System.Windows.Forms.Button btn_cancel;
         private System.Windows.Forms.Button btn_apply;
         private System.Windows.Forms.Panel pnl_settingsButtons;
