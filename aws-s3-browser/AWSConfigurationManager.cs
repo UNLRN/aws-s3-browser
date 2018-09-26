@@ -23,13 +23,20 @@ namespace aws_uploader
                 return new BucketConfiguration();
             }
 
-            var lines = System.IO.File.ReadAllLines(fullFileName);
+            var lines = File.ReadAllLines(fullFileName);
+
+            if (lines.Count() != 4)
+            {
+                return new BucketConfiguration();
+            }
+
             return new BucketConfiguration()
             {
                 AccessKey = lines[1].Split('=')[1].Trim(),
                 SecretKey = lines[2].Split('=')[1].Trim(),
                 Region = lines[3].Split('=')[1].Trim(),
             };
+
         }
 
         public static void SaveConfiguration(BucketConfiguration bucketConfiguration)

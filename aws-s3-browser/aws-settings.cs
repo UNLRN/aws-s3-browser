@@ -46,6 +46,7 @@ namespace aws_uploader
                 MessageBox.Show("Configurations has been updated.", "Information", MessageBoxButtons.OK,
                     MessageBoxIcon.Information);
 
+                this.DialogResult = DialogResult.OK;
             }
         }
 
