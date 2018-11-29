@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.IO;
 using System.Runtime.InteropServices;
 using Amazon;
+using Amazon.Runtime;
 using Amazon.S3;
 using Amazon.S3.Util;
 using Amazon.S3.Model;
@@ -90,13 +91,35 @@ namespace aws_uploader
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            s3Client = new AmazonS3Client(RegionEndpoint.USEast1);
+            ConfigureAmazonClient();
+        }
+
+        private void ConfigureAmazonClient()
+        {
+
+            var config = AWSConfigurationManager.GetConfiguration();
+
+            if (!string.IsNullOrEmpty(config?.Region))
+            {
+
+                var awsCredentials = new BasicAWSCredentials(
+                    config.AccessKey,
+                    config.SecretKey);
+
+                var s3Config = new AmazonS3Config
+                {
+                    RegionEndpoint = RegionEndpoint.EnumerableAllRegions.FirstOrDefault(r => r.DisplayName == config.Region)
+                };
+
+                s3Client = new AmazonS3Client(awsCredentials, s3Config);
+
+            }
         }
 
         private void btn_settings_Click(object sender, EventArgs e)
         {
             aws_settings settings = new aws_settings();
-            settings.Show();
+            settings.ShowDialog();
         }
 
         private void btn_browse_Click(object sender, EventArgs e)
@@ -220,18 +243,19 @@ namespace aws_uploader
         {
             try
             {
+                ConfigureAmazonClient();
                 ListBucketsResponse response = s3Client.ListBuckets();
-                foreach (S3Bucket b in response.Buckets)
+                foreach (S3Bucket bucket in response.Buckets)
                 {
-                    tvw_buckets.Nodes.Add(b.BucketName);
+                    tvw_buckets.Nodes.Add(bucket.BucketName);
                 }
             }
             catch (AmazonS3Exception ae)
             {
                 Console.WriteLine(ae);
-                throw;
+                MessageBox.Show(ae.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            
+
 
         }
 
@@ -247,5 +271,15 @@ namespace aws_uploader
                 Console.WriteLine(er);
             }
         }
+
+        private void tvw_buckets_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            tvw_files.Nodes.Clear();
+            foreach (var obj in s3Client.ListObjects(e.Node.Text).S3Objects)
+            {
+                tvw_files.Nodes.Add(obj.Key);
+            }
+        }
+
     }
 }

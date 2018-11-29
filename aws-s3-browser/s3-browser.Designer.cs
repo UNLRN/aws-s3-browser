@@ -49,6 +49,7 @@
             this.tab_fileManager = new System.Windows.Forms.TabPage();
             this.ofd_getFolders = new System.Windows.Forms.OpenFileDialog();
             this.ofd_getFiles = new System.Windows.Forms.OpenFileDialog();
+            this.tvw_files = new System.Windows.Forms.TreeView();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fileList)).BeginInit();
             this.gbx_buckets.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -57,6 +58,7 @@
             this.splitContainer1.SuspendLayout();
             this.tabctrl.SuspendLayout();
             this.tab_upload.SuspendLayout();
+            this.tab_fileManager.SuspendLayout();
             this.SuspendLayout();
             // 
             // tbx_directory
@@ -170,6 +172,7 @@
             this.tvw_buckets.Name = "tvw_buckets";
             this.tvw_buckets.Size = new System.Drawing.Size(365, 559);
             this.tvw_buckets.TabIndex = 5;
+            this.tvw_buckets.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.tvw_buckets_AfterSelect);
             // 
             // btn_refreshBucket
             // 
@@ -248,20 +251,21 @@
             this.tab_upload.Controls.Add(this.btn_addItem);
             this.tab_upload.Controls.Add(this.dgv_fileList);
             this.tab_upload.Controls.Add(this.btn_browse);
-            this.tab_upload.Location = new System.Drawing.Point(4, 22);
+            this.tab_upload.Location = new System.Drawing.Point(4, 24);
             this.tab_upload.Name = "tab_upload";
             this.tab_upload.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_upload.Size = new System.Drawing.Size(755, 605);
+            this.tab_upload.Size = new System.Drawing.Size(755, 603);
             this.tab_upload.TabIndex = 0;
             this.tab_upload.Text = "Upload";
             this.tab_upload.UseVisualStyleBackColor = true;
             // 
             // tab_fileManager
             // 
-            this.tab_fileManager.Location = new System.Drawing.Point(4, 22);
+            this.tab_fileManager.Controls.Add(this.tvw_files);
+            this.tab_fileManager.Location = new System.Drawing.Point(4, 24);
             this.tab_fileManager.Name = "tab_fileManager";
             this.tab_fileManager.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_fileManager.Size = new System.Drawing.Size(755, 605);
+            this.tab_fileManager.Size = new System.Drawing.Size(755, 603);
             this.tab_fileManager.TabIndex = 1;
             this.tab_fileManager.Text = "Files";
             this.tab_fileManager.UseVisualStyleBackColor = true;
@@ -277,17 +281,26 @@
             // 
             this.ofd_getFiles.FileName = "Choose File";
             // 
+            // tvw_files
+            // 
+            this.tvw_files.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tvw_files.Location = new System.Drawing.Point(3, 3);
+            this.tvw_files.Name = "tvw_files";
+            this.tvw_files.Size = new System.Drawing.Size(749, 597);
+            this.tvw_files.TabIndex = 6;
+            // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1184, 662);
+            this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Droid Sans", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(1200, 700);
             this.MinimumSize = new System.Drawing.Size(750, 500);
             this.Name = "frmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AWS S3 Browser";
             this.Load += new System.EventHandler(this.frmMain_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_fileList)).EndInit();
@@ -299,6 +312,7 @@
             this.tabctrl.ResumeLayout(false);
             this.tab_upload.ResumeLayout(false);
             this.tab_upload.PerformLayout();
+            this.tab_fileManager.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -326,6 +340,7 @@
         private System.Windows.Forms.TabControl tabctrl;
         private System.Windows.Forms.TabPage tab_upload;
         private System.Windows.Forms.TabPage tab_fileManager;
+        private System.Windows.Forms.TreeView tvw_files;
     }
 }
 
